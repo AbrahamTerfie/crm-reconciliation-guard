@@ -75,3 +75,8 @@ Plan schema version 2 includes explicit field-policy metadata. Fingerprints cove
 This is an educational prototype, not a production CRM adapter. Email case folding is a documented business policy, not a claim about every mail server. Email validation is intentionally not full RFC validation. Plus-addresses and dots are not rewritten. Conflicts require a human decision; no “last writer wins.” Inputs are loaded in memory, and there is no connector, network retry layer, deletion support, field-level consent model, or transactional CRM write path.
 
 CSV output preserves original field content and may contain spreadsheet formulas if inputs are untrusted. Prefer target-preview.json in a plain-text editor or JSON viewer: formula-like strings remain literal data without silently changing CSV values. This is not sanitization for subsequent import. Never open untrusted raw CSV in an auto-evaluating spreadsheet. A production adapter should add authentication, stable CRM IDs, optimistic concurrency, field mapping, redaction/retention controls, streaming for large files, and rate-limit handling.
+
+
+## Optional local AI review (prototype; live inference unverified)
+
+See [local AI review](docs/local-ai-review.md) for a count-only triage adapter and a no-model facts preview. It requires no API keys and never downloads a model or applies AI suggestions. Live generation is not yet verified: the development Ollama service has no installed model. The deterministic audit remains independent of AI. The complete local suite now has 53 passing tests, including eighteen offline adapter and transport tests; stub responses are not evidence of live model quality.
