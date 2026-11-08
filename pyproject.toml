@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crm-reconciliation-guard"
+version = "0.1.0"
+description = "A read-only CSV reconciliation and automation repair portfolio project"
+requires-python = ">=3.10"
+
+[project.scripts]
+crm-guard = "crm_guard.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["crm_guard*"]

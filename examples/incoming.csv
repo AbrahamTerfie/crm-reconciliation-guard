@@ -1,0 +1,8 @@
+email,name,company
+ AVERY@example.test ,Avery Stone,Northstar Demo
+blair@example.test,,Harbor Demo
+casey@example.test,Casey Lane,Sample Studio
+CASEY@example.test,Casey L.,Other Studio
+not-an-email,Invalid Record,Demo
+ellis@example.test,Ellis Hart,Demo Works
+frankie@example.test,Frankie Moss,Demo Works
