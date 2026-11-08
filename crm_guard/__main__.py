@@ -3,7 +3,7 @@ import csv
 import json
 import sys
 from pathlib import Path
-from .core import read_csv, reconcile, preview_target, write_csv
+from .core import read_csv, reconcile, preview_target, write_csv, columns
 
 
 def main(argv=None):
@@ -17,7 +17,12 @@ def main(argv=None):
         plan = reconcile(source, target)
         args.output.mkdir(parents=True, exist_ok=False)
         (args.output / 'plan.json').write_text(json.dumps(plan, indent=2) + '\n', encoding='utf-8')
-        write_csv(args.output / 'target-preview.csv', preview_target(target, plan))
+        preview = preview_target(target, plan)
+        write_csv(args.output / 'target-preview.csv', preview)
+        with (args.output / 'target-preview.json').open('x', encoding='utf-8') as stream:
+            json.dump({'columns': list(columns(preview)), 'rows': preview}, stream,
+                      indent=2, ensure_ascii=True)
+            stream.write('\n')
     except (OSError, ValueError, csv.Error) as exc:
         print(f'Error: {exc}', file=sys.stderr)
         return 1

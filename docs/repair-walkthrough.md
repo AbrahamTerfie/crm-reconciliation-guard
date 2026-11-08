@@ -20,7 +20,7 @@ This repository implements the replacement boundary rather than inventing an out
 ## Two-minute demo
 
 - Explain the naive import's three risks: identity mismatch, destructive blanks, and ambiguous duplicates.
-- Run the 18 tests.
+- Run the 35 tests.
 - Run the sample command from the README. Explain why exit 2 is an expected review signal, not a crash.
 - Open `plan.json`: one create, one update, and six issue records.
 - Open the preview and show Blair's name was retained.
@@ -32,3 +32,12 @@ This repository implements the replacement boundary rather than inventing an out
 A Zapier, Make, n8n, or scheduled Python workflow could call a packaged version of this boundary after receiving a CSV. Branch on exit 2 to a review queue and exit 1 to an operational alert. Do not automatically import the full preview. A production CRM adapter would translate reviewed changes to provider-specific operations and use stable IDs plus version checks. It must also decide what to do with extra CSV fields, permission boundaries, deletion requests and data retention.
 
 The project is deliberately read-only with respect to external systems. Adding live writes is a separate engineering and authorization step.
+
+
+## Preserving custom fields and reviewing safely
+
+The preview retains target IDs, notes and other unmapped columns and their order. Incoming extra fields cannot overwrite them. New contacts have blank extra values, so required CRM fields need explicit mapping before import. Header-only exports retain their schema.
+
+Strict CSV parsing rejects unfinished quotes and trailing characters after closing quotes. Invalid input returns exit 1 before outputs are created. target-preview.json provides a text-review alternative without altering formula-like values; raw CSV remains unsafe in evaluating spreadsheets with untrusted data.
+
+Plans require integer schema version 2 and valid create/update actions, mapped string fields, unique change identities and consistent target identity counts. This is structural validation, not an approval mechanism or live CRM guarantee.
