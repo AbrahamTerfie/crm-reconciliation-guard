@@ -79,4 +79,9 @@ CSV output preserves original field content and may contain spreadsheet formulas
 
 ## Optional local AI review (prototype; live inference unverified)
 
-See [local AI review](docs/local-ai-review.md) for a count-only triage adapter and a no-model facts preview. It requires no API keys and never downloads a model or applies AI suggestions. Live generation is not yet verified: the development Ollama service has no installed model. The deterministic audit remains independent of AI. The complete local suite now has 53 passing tests, including eighteen offline adapter and transport tests; stub responses are not evidence of live model quality.
+See [local AI review](docs/local-ai-review.md) for a count-only triage adapter and a no-model facts preview. It requires no API keys and never downloads a model or applies AI suggestions. Live generation is not yet verified: the development Ollama service has no installed model. The deterministic audit remains independent of AI. The complete local suite now has 58 passing tests, including eighteen offline adapter and transport tests; stub responses are not evidence of live model quality.
+
+
+## Reproducible ARM64-friendly local run
+
+The [offline deployment runbook](docs/arm64-local-deployment.md) and `tools/run_synthetic_demo.py` run the tests, synthetic baseline/rerun, and no-inference facts preview without third-party dependencies or a web server. This is preparation for a future Linux ARM64 VM, not an Oracle deployment or a claim of free resource availability. Local suite: 58 tests. Linux/Oracle validation remains pending.
